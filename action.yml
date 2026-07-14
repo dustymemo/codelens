@@ -1,0 +1,35 @@
+name: "CodeLens"
+description: "Independently executes changed code on a PR and posts a plain-English execution trace, so reviewers comprehend AI-written code instead of rubber-stamping it."
+author: "CodeLens"
+
+branding:
+  icon: "search"
+  color: "purple"
+
+inputs:
+  github-token:
+    description: "Token used to post the report comment on the PR. Defaults to the workflow token."
+    required: false
+    default: ${{ github.token }}
+
+  llm-backend:
+    description: "Which model backend to use: 'sdk' (Anthropic API key) or 'cli' (Claude CLI via OAuth token)."
+    required: false
+    default: "sdk"
+
+  anthropic-api-key:
+    description: "Anthropic API key. Required when llm-backend is 'sdk'. Billed per token."
+    required: false
+
+  claude-code-oauth-token:
+    description: "Claude CLI OAuth token (from `claude setup-token`). Required when llm-backend is 'cli'. Uses your subscription."
+    required: false
+
+  model:
+    description: "Model id used for the two Claude calls."
+    required: false
+    default: "claude-sonnet-4-6"
+
+runs:
+  using: "node20"
+  main: "dist/action.js"

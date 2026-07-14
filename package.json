@@ -1,0 +1,49 @@
+{
+  "name": "codelens",
+  "version": "0.1.0",
+  "description": "An independent AI agent that executes changed code on every PR and posts a plain-English execution trace, so human reviewers comprehend AI-written code instead of rubber-stamping it.",
+  "type": "module",
+  "bin": {
+    "codelens": "dist/index.js"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "prompts",
+    "action.yml",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
+  },
+  "keywords": [
+    "code-review",
+    "ai",
+    "claude",
+    "github-action",
+    "pull-request",
+    "execution-trace",
+    "comprehension"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "@octokit/rest": "^21.0.2",
+    "isolated-vm": "^5.0.1",
+    "ts-morph": "^24.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
+  }
+}

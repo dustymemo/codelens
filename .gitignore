@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Test / coverage
+coverage/
+.vitest/
+
+# Secrets & local env
+.env
+.env.local
+*.pem
+
+# Claude CLI local auth (never commit)
+.claude/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# NOTE: __codelens__/evals/ is intentionally NOT ignored —
+# confirmed evals are committed so the repo accumulates them.
