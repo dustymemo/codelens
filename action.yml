@@ -30,6 +30,11 @@ inputs:
     required: false
     default: "claude-sonnet-4-6"
 
+# Packaging: Docker action — see docs/adr/0001-action-packaging.md (CL-21).
+# isolated-vm is a native addon, so the action ships as a container that pins the
+# compiled binary and wraps the untrusted-code executor in a second (OS-level) wall.
+# Dev: build the Dockerfile on the runner. Release: switch to a GHCR-published image
+#   image: "docker://ghcr.io/<org>/codelens:v1"
 runs:
-  using: "node20"
-  main: "dist/action.js"
+  using: "docker"
+  image: "Dockerfile"
