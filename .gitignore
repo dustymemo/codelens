@@ -1,7 +1,8 @@
 # Dependencies
 node_modules/
 
-# Build output
+# Build output — never committed. The Docker action builds dist/ inside the image
+# (see docs/adr/0001-action-packaging.md), so it must not be vendored into the repo.
 dist/
 *.tsbuildinfo
 

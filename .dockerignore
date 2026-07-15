@@ -1,0 +1,15 @@
+# Keep the build context small & the image clean.
+node_modules/
+dist/
+coverage/
+.vitest/
+.git/
+.github/
+docs/
+*.log
+.env
+.env.local
+*.pem
+.claude/
+.DS_Store
+Thumbs.db
