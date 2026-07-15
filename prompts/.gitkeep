@@ -1,0 +1,3 @@
+# Prompt templates live here (e.g. understanding-agent.md, CL-16).
+# Placeholder so the directory exists for `npm publish` (package.json "files")
+# and the Docker build's `COPY prompts` (CL-21).
