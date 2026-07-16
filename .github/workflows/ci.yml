@@ -14,7 +14,8 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          # Keep in step with the Dockerfile pin and engines.node (CL-22).
+          node-version: "24"
           cache: npm
 
       # npm ci also compiles/fetches the native isolated-vm binary on Linux —
