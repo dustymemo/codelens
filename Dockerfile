@@ -19,9 +19,16 @@ RUN apt-get update \
 WORKDIR /action
 
 # Install deps first (better layer caching). Copy manifests, then install.
-# `npm ci` compiles/fetches the isolated-vm binary here, once, at image build.
+# `npm ci` resolves the isolated-vm binary here, once, at image build.
 COPY package.json package-lock.json* ./
 RUN npm ci
+
+# Fail the image build if the sandbox is not real. `npm ci` exiting 0 does not
+# prove it: the addon resolves from a prebuilt binary without compiling, and npm
+# 11.16 only warns about unapproved install scripts. Without this gate a broken
+# image ships green and dies on the first PR it runs against.
+COPY scripts ./scripts
+RUN node scripts/verify-sandbox.cjs
 
 # Copy the rest of the source and build TS -> dist/.
 COPY tsconfig.json ./
