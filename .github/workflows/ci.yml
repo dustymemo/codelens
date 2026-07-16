@@ -14,12 +14,19 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          # Keep in step with the Dockerfile pin and engines.node (CL-22).
+          node-version: "24"
           cache: npm
 
-      # npm ci also compiles/fetches the native isolated-vm binary on Linux —
-      # so a green install here is the first proof the native dep builds (CL-19).
       - run: npm ci
+
+      # A green `npm ci` is NOT proof the sandbox works: it resolves the native
+      # addon from a prebuilt binary in seconds, and npm 11.16 merely *warns*
+      # about unapproved install scripts (it will block them in a future
+      # release). Execute real code in a real isolate so the executor's one
+      # load-bearing dependency is proven rather than assumed (ADR 0001 / CL-21).
+      - name: Prove the isolated-vm sandbox executes code
+        run: node scripts/verify-sandbox.cjs
 
       - run: npm run typecheck
 

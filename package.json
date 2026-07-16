@@ -34,16 +34,21 @@
   ],
   "license": "MIT",
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
+  },
+  "//allowScripts": "npm 11.16+ warns about unreviewed dependency install scripts and will block them in a future release. isolated-vm must compile/resolve its native addon or the sandbox does not exist; esbuild's postinstall backs vitest. scripts/verify-sandbox.cjs is the gate that catches it either way.",
+  "allowScripts": {
+    "isolated-vm": true,
+    "esbuild": true
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
     "@octokit/rest": "^21.0.2",
-    "isolated-vm": "^5.0.1",
+    "isolated-vm": "^6.1.2",
     "ts-morph": "^24.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.14.0",
+    "@types/node": "^24.0.0",
     "@vitest/coverage-v8": "^2.1.8",
     "typescript": "^5.6.3",
     "vitest": "^2.1.8"
